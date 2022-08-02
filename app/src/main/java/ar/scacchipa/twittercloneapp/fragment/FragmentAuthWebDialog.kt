@@ -9,17 +9,17 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ar.scacchipa.twittercloneapp.data.ResponseDomain
 import ar.scacchipa.twittercloneapp.data.UserAccessTokenDomain
 import ar.scacchipa.twittercloneapp.databinding.FragmentAuthWebDialogLayoutBinding
 import ar.scacchipa.twittercloneapp.viewmodel.AuthWebDialogViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.net.URI
 
 class FragmentAuthWebDialog : Fragment() {
 
-    private val viewModel: AuthWebDialogViewModel by viewModels()
+    private val viewModel: AuthWebDialogViewModel by viewModel()
     private var binding: FragmentAuthWebDialogLayoutBinding? = null
 
     override fun onCreateView(

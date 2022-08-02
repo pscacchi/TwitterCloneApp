@@ -11,7 +11,7 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 class AuthorizationUseCaseTest {
 
-    private val authorizationUseCase = AuthorizationUseCase(MockAuthorizationRespository())
+    private val authorizationUseCase = AuthorizationUseCase(MockAuthorizationRepository())
 
     @Test
     fun authorizationUseCaseShouldReturnAUserAccessToken() = runTest {
@@ -30,7 +30,7 @@ class AuthorizationUseCaseTest {
     }
 }
 
-class MockAuthorizationRespository: IAuthorizationRepository {
+class MockAuthorizationRepository: IAuthorizationRepository {
     override suspend fun requestAccessToken(
         transitoryToken: String,
         grantType: String,

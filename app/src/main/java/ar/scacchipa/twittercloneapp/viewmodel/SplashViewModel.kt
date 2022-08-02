@@ -8,7 +8,7 @@ import ar.scacchipa.twittercloneapp.domain.SplashTimerUseCase
 import kotlinx.coroutines.launch
 
 class SplashViewModel(
-    private val splashTimer: SplashTimerUseCase = SplashTimerUseCase()
+    private val splashTimer: SplashTimerUseCase
 ): ViewModel() {
 
     private val _splashWasSpent = MutableLiveData(false)

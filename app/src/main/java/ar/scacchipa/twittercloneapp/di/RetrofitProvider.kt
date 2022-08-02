@@ -1,5 +1,6 @@
-package ar.scacchipa.twittercloneapp.datasource
+package ar.scacchipa.twittercloneapp.di
 
+import ar.scacchipa.twittercloneapp.datasource.IAuthDataSource
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

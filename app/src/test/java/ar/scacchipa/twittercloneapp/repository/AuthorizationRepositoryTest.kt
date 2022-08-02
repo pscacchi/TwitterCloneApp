@@ -2,6 +2,7 @@ package ar.scacchipa.twittercloneapp.repository
 
 import ar.scacchipa.twittercloneapp.data.ResponseDomain
 import ar.scacchipa.twittercloneapp.data.UserAccessTokenData
+import ar.scacchipa.twittercloneapp.data.UserAccessTokenDataMapper
 import ar.scacchipa.twittercloneapp.data.UserAccessTokenDomain
 import ar.scacchipa.twittercloneapp.datasource.IAuthDataSource
 import ar.scacchipa.twittercloneapp.utils.Constants
@@ -17,7 +18,9 @@ import retrofit2.Response
 @ExperimentalCoroutinesApi
 class AuthorizationRepositoryTest {
 
-    private var subject: IAuthorizationRepository = AuthorizationRepository(MockAuthDataSource())
+    private var subject: IAuthorizationRepository = AuthorizationRepository(
+        MockAuthDataSource(),
+        UserAccessTokenDataMapper())
 
     @Test
     fun repoShouldReturnASuccessToken() = runTest {
@@ -68,7 +71,7 @@ class AuthorizationRepositoryTest {
         )).thenReturn(
             Response.success(null)
         )
-        val subject = AuthorizationRepository(mockAuthDataSource)
+        val subject = AuthorizationRepository(mockAuthDataSource, UserAccessTokenDataMapper())
 
         Assert.assertEquals(
             ResponseDomain.Error(), subject.requestAccessToken(
@@ -84,7 +87,8 @@ class AuthorizationRepositoryTest {
     @Test
     fun whenAuthorizationRepoCatchException() = runTest {
         val subject = AuthorizationRepository(
-            genAccessTokenSource = MockExceptionAuthDataSource()
+            genAccessTokenSource = MockExceptionAuthDataSource(),
+            mapper = UserAccessTokenDataMapper()
         )
 
         Assert.assertEquals(

@@ -1,18 +1,19 @@
 package ar.scacchipa.twittercloneapp.repository
 
-import ar.scacchipa.twittercloneapp.data.*
+import ar.scacchipa.twittercloneapp.data.IMapper
+import ar.scacchipa.twittercloneapp.data.ResponseDomain
+import ar.scacchipa.twittercloneapp.data.UserAccessTokenData
+import ar.scacchipa.twittercloneapp.data.UserAccessTokenDomain
 import ar.scacchipa.twittercloneapp.datasource.IAuthDataSource
-import ar.scacchipa.twittercloneapp.datasource.provideAuthSourceDateApi
-import ar.scacchipa.twittercloneapp.datasource.provideRetrofit
 import ar.scacchipa.twittercloneapp.utils.Constants
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class AuthorizationRepository(
-    private val genAccessTokenSource: IAuthDataSource = provideAuthSourceDateApi(provideRetrofit()),
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val mapper: IMapper<UserAccessTokenData, UserAccessTokenDomain> = UserAccessTokenDataMapper()
+    private val genAccessTokenSource: IAuthDataSource,
+    private val mapper: IMapper<UserAccessTokenData, UserAccessTokenDomain>,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ): IAuthorizationRepository {
     override suspend fun requestAccessToken(
         transitoryToken: String,

@@ -7,6 +7,7 @@ import ar.scacchipa.twittercloneapp.data.ResponseDomain
 import ar.scacchipa.twittercloneapp.data.UserAccessTokenDomain
 import ar.scacchipa.twittercloneapp.domain.AuthorizationUseCase
 import ar.scacchipa.twittercloneapp.domain.ConsumableAuthUseCase
+import ar.scacchipa.twittercloneapp.domain.MockAuthorizationRepository
 import ar.scacchipa.twittercloneapp.utils.Constants
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -87,7 +88,7 @@ class AuthWebDialogViewModelTest {
     }
 }
 
-class MockAuthorizationUseCase: AuthorizationUseCase() {
+class MockAuthorizationUseCase: AuthorizationUseCase(MockAuthorizationRepository()) {
     override suspend operator fun invoke(
         transitoryToken: String
     ): ResponseDomain {

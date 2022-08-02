@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ar.scacchipa.twittercloneapp.R
 import ar.scacchipa.twittercloneapp.databinding.DialogLoginErrorBinding
 import ar.scacchipa.twittercloneapp.databinding.FragmentLoginLayoutBinding
 import ar.scacchipa.twittercloneapp.viewmodel.LoginViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragmentLogin : Fragment() {
 
@@ -21,7 +21,7 @@ class FragmentLogin : Fragment() {
     private var errorBinding: DialogLoginErrorBinding? = null
     private var errorDialog: AlertDialog? = null
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModel()
     private val args: FragmentLoginArgs by navArgs()
 
     private var readArgs = true

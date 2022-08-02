@@ -7,24 +7,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.scacchipa.twittercloneapp.data.ResponseDomain
-import ar.scacchipa.twittercloneapp.datasource.provideAuthSourceDateApi
-import ar.scacchipa.twittercloneapp.datasource.provideRetrofit
 import ar.scacchipa.twittercloneapp.domain.AuthorizationUseCase
 import ar.scacchipa.twittercloneapp.domain.ConsumableAuthUseCase
-import ar.scacchipa.twittercloneapp.repository.AuthorizationRepository
 import ar.scacchipa.twittercloneapp.utils.Constants
 import kotlinx.coroutines.launch
 import java.net.URI
 import kotlin.collections.set
 
 class AuthWebDialogViewModel (
-    private val authorizationUseCase: AuthorizationUseCase =
-        AuthorizationUseCase(AuthorizationRepository(provideAuthSourceDateApi(provideRetrofit()))),
-    private val consumableAuthUseCase: ConsumableAuthUseCase = ConsumableAuthUseCase()
+    private val authorizationUseCase: AuthorizationUseCase,
+    private val consumableAuthUseCase: ConsumableAuthUseCase
 ): ViewModel() {
 
-    private val _responseDomain = MutableLiveData<ResponseDomain>()
-    val responseDomain = _responseDomain as LiveData<ResponseDomain>
+    private val _responseDomain = MutableLiveData<ResponseDomain?>()
+    val responseDomain = _responseDomain as LiveData<ResponseDomain?>
 
     fun onReceiveUrl(uri: URI) {
         if (uri.host == URI(Constants.REDIRECT_URI).host) {
